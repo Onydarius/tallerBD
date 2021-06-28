@@ -1,4 +1,6 @@
 <?php
+      session_start();
+
       $rootPath = $_SERVER['DOCUMENT_ROOT'].'/Taller';
       include_once($rootPath.'/controllers/connection/conexion.php');
       include_once($rootPath.'/controllers/clients/Cliente.php');
