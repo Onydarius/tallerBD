@@ -1,29 +1,43 @@
 <?php
+include_once 'config/config.php';
+include_once 'core/routes.php';
+
+
 session_start();
-$_SESSION['user'] = $_REQUEST['user'];;
-$_SESSION['password'] = $_REQUEST['password'];
-
 if (!isset($_SESSION['user'])) {
-    session_destroy();
-    header("Location: /Taller/vistas/login.php");
+    if (!isset($_REQUEST['user'])) {
+        session_destroy();
+        $controlador = cargarControlador('login');
+    } else {
+        $_SESSION['user'] = $_REQUEST['user'];
+        $_SESSION['password'] = $_REQUEST['password'];
+        include_once 'config/conexion.php';
+        $conexion = Conexion::login();
+        if ($conexion == 1) {
+            $controlador = cargarControlador(CONTROLADOR_PRINCIPAL);
+            $controlador->Index();
+        } else {
+            session_destroy();
+            $controlador = cargarAccion(cargarControlador('login'), 'error');
+        }
+    }
 } else {
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/Taller/controllers/connection/conexion.php');
-    Conexion::abrirConexion();
+    include_once 'config/conexion.php';
+    $conexion = Conexion::login();
+
+    if (isset($_GET['c'])) {
+        $controlador = cargarControlador($_GET['c']);
+        if (isset($_GET['a'])) {
+            if (isset($_GET['id'])) {
+                cargarAccion($controlador, $_GET['a'], $_GET['id']);
+            } else {
+                cargarAccion($controlador, $_GET['a']);
+            }
+        } else {
+            cargarAccion($controlador, ACCION_PRINCIPAL);
+        }
+    } else {
+        $controlador = cargarControlador(CONTROLADOR_PRINCIPAL);
+        $controlador->index();
+    }
 }
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taller</title>
-    <frameset cols="15%,85%" frameborder="no">
-        <frame src="/Taller/vistas/menu.php" name="menu">
-            <frame src="/Taller/vistas/clientes/clientes.php" name="display">
-    </frameset>
-</head>
-
-</html>
