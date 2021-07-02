@@ -5,6 +5,7 @@
 		private static $conexion;
 		
 		public static function abrirConexion(){
+			session_start();
 			if(!isset(self::$conexion)){
 				try{
 					self::$conexion = new PDO('pgsql:host=localhost;port=5432;dbname=taller',$_SESSION['user'],$_SESSION['password']);

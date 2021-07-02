@@ -1,58 +1,65 @@
 <?php
-$rootPath = $_SERVER['DOCUMENT_ROOT'].'/Taller';
-include_once($rootPath . '/controllers/vehicles/Vehiculos.php');
-include_once($rootPath . '/controllers/clients/Cliente.php');
-class Nota
+
+class Notas_Model
 {
-    /*public static function getCliente($conexion, $id_cliente)
+    public function __construct()
     {
-        $sql = "SELECT * FROM cliente where id_cliente = $id_cliente";
-        foreach ($conexion->query($sql) as $row) { ?>
-            <?php print $row['nombre'] . " "; ?>
-            <?php print $row['ape_pat']; ?>
-        <?php
-        }
+        include_once 'config/conexion.php';
+        $this->db = Conexion::getConexion();
+        $this->notas = array();
     }
-
-    public static function allClientes($conexion, $id_cliente)
+    public function fillNotas()
     {
-        $sql = "SELECT * FROM cliente";
-        foreach ($conexion->query($sql) as $row) { ?>
-            <?php
-            if ($id_cliente == $row["id_cliente"])
-                print("<option selected value=" . $row["id_cliente"] . ">" . $row["nombre"] . " " . $row["ape_pat"] . "</option>");
-            else
-                print("<option value=" . $row["id_cliente"] . ">" . $row["nombre"] . " " . $row["ape_pat"] . "</option>");
-            ?>
-        <?php
+        $sql = $this->db->prepare("select nota.id_nota, nota.total, nota.id_vehiculo, nota.fec_salida, cliente.nombre, cliente.ape_pat, cliente.ape_mat
+        from nota,
+            vehiculo,
+            cliente
+        where
+        nota.id_vehiculo = vehiculo.matricula and
+        vehiculo.id_cliente = cliente.id_cliente");
+        $sql->execute();
+        while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->notas[] = $row;
         }
-    }*/
-
-    public static function fillNotas($conexion)
-    {
-        $sql = "SELECT * FROM nota";
-        foreach ($conexion->query($sql) as $row) { ?>
-            <tr>
-                <td><?php print $row['id_nota']; ?></td>
-                <td><?php print $row['id_vehiculo']; ?></td>
-                <td><?php cliente::getCliente($conexion, Vehiculos::getDueño($conexion,$row['id_vehiculo']));?></td>
-
-                <td><?php print $row['total']; ?></td>
-                <?php print("<td><a href=\".\modificarNota.php?id_nota=" . $row['id_nota'] . "&&id_vehiculo=" . $row['id_vehiculo'] . "&&total=" . $row['total'] .
-                    "&&fec_entrada=" . $row['fec_entrada'] . "&&fec_salida=" . $row['fec_salida'] . "&&id_mecanico=" . $row['id_mecanico'] . "\">Modificar</a></td>"); ?>
-            </tr>
-<?php
-        } //fin ciclo		
+        return $this->notas;
     }
-    /*public static function insertarMecanico($conexion, $nombre, $ape_pat, $ape_mat, $rfc, $direccion, $telefono)
+    public function getFolio()
     {
-        $sql =  $conexion->prepare("INSERT INTO mecanico VALUES (nextval('mecanico_seq'),'" . $nombre . "', '" . $ape_pat . "','" . $ape_mat  . "', '" . $rfc .  "','"  . $direccion . "',"  . $telefono . ")");
+        $sql =  $this->db->prepare("select nextval('nota_seq')");
+        $sql->execute();
+        $row = $sql->fetch(PDO::FETCH_ASSOC);
+        return $row;
+    }
+    public function insertar($id_nota, $dia,$mes,$año, $id_vehiculo, $id_mecanico)
+    {
+        $sql =  $this->db->prepare("INSERT INTO nota(id_nota, fec_entrada, id_vehiculo,id_mecanico, total) VALUES (".$id_nota.",make_date(". $año."
+        , ".$mes.", ". $dia."), '" . $id_vehiculo . "'," . $id_mecanico .", 0)");
         $sql->execute();
     }
-    public static function actualizarMecanico($conexion, $nombre, $ape_pat, $ape_mat, $rfc, $direccion, $telefono, $id_mecanico)
+    public function agregarServicios($id_servico, $id_nota)
     {
-        $sql =  $conexion->prepare("UPDATE mecanico SET nombre='" . $nombre . "', ape_pat='" . $ape_pat . "', ape_mat='" . $ape_mat . "', rfc='" . $rfc . "', direccion='" . $direccion . "', telefono=" . $telefono . " WHERE id_mecanico='" . $id_mecanico . "' ");
+        $sql =  $this->db->prepare("INSERT INTO notaxservicio VALUES 
+        (".$id_nota.",".$id_servico.")");
         $sql->execute();
-    }*/
+    }
+    public function getServicios($id_nota){
+        $sql = $this->db->prepare("select id_servicio from notaxservicio where id_nota = ".$id_nota);
+        $sql->execute();
+        while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->notas[] = $row;
+        }
+        return $this->notas;
+    }
+    public function eliminar($id_nota)
+	{
+		$sql = $this->db->prepare("delete from nota WHERE id_nota   ='" . $id_nota."'");
+		$sql->execute();
+	}
+    public function getNota($id_nota)
+	{
+		$sql =  $this->db->prepare("select * from nota where id_nota = '". $id_nota."' LIMIT 1");
+		$sql->execute();
+		$row = $sql->fetch(PDO::FETCH_ASSOC);
+		return $row;
+	}
 }
-?>

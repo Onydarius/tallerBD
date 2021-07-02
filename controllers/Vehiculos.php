@@ -10,7 +10,7 @@ class VehiculosController
     {
         $vehiculos = new Vehiculos_model();
         $data["titulo"] = "Vehiculos";
-        $data["vehiculos"] = $vehiculos->getVehiculos();
+        $data["vehiculos"] = $vehiculos->fillVehiculos();
         require_once "site-media/views/menu.php";
         require_once "site-media/views/vehiculos/vehiculos.php";
     }
@@ -70,6 +70,11 @@ class VehiculosController
     public function getClientes(){
         $clientes = new Clientes_model();
         $resultado = $clientes->getClientes();
+        return $resultado;
+    }
+    public function getOwner($matricula){
+        $vehiculos = new Vehiculos_model();
+        $resultado = $vehiculos->getCliente($matricula);
         return $resultado;
     }
 }

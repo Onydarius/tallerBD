@@ -44,4 +44,14 @@ class Mecanicos_model
         $sql = $this->db->prepare("UPDATE mecanico SET nombre='" . $nombre . "', ape_pat='" . $ape_pat . "', ape_mat='" . $ape_mat . "', rfc='" . $rfc . "', direccion='" . $direccion . "', telefono=" . $telefono . " WHERE id_mecanico='" . $id_mecanico . "' ");
         $sql->execute();
     }
+    public function getMecanicos()
+    {
+        $sql = $this->db->prepare("select concat(nombre || ' ' || ape_pat || ' ' || ape_mat) as nombre, id_mecanico from mecanico");
+            $sql->execute();
+            while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                $this->mecanico[] = $row;
+            }
+            return $this->mecanico;	
+        
+    }
 }

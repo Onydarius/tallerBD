@@ -46,5 +46,14 @@ class Servicios_model
         $sql =  $this->db->prepare("UPDATE servicios SET nombre= '" . $nombre . "', descripcion= '" . $descripcion . "', precios= " . $precios . " WHERE id_servicios= " . $id_servicios);
         $sql->execute();
     }
+    public function getServicios()
+    {
+        $sql = $this->db->prepare("select nombre, id_servicios from servicios");
+        $sql->execute();
+        while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $this->clientes[] = $row;
+        }
+        return $this->clientes;
+    }
 }
 ?>

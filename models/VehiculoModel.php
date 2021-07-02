@@ -12,7 +12,7 @@ class Vehiculos_model
 		$this->clientes = array();
 	}
 
-	public function getVehiculos()
+	public function fillVehiculos()
 	{
 		try {
 			$sql = $this->db->prepare("select vehiculo.matricula, vehiculo.marca, vehiculo.modelo, vehiculo.color,
@@ -31,6 +31,15 @@ class Vehiculos_model
 		}
 	}
 	
+	public function getVehiculos()
+	{
+		$sql =  $this->db->prepare("select matricula from vehiculo");
+		$sql->execute();
+		while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+			$this->vehiculos[] = $row;
+		}
+		return $this->vehiculos;
+	}
 
 	public function insertar($matricula, $marca, $modelo, $color, $id_cliente)
 	{
@@ -40,12 +49,11 @@ class Vehiculos_model
 
 	public function getVehiculo($matricula)
 	{
-		$sql =  $this->db->prepare("select * from vehiculo where matricula = '". $matricula."' LIMIT 1");
+		$sql =  $this->db->prepare("select * from vehiculo where matricula = '". $matricula. "' LIMIT 1");
 		$sql->execute();
 		$row = $sql->fetch(PDO::FETCH_ASSOC);
 		return $row;
 	}
-
 
 	public function modificar($matricula, $marca, $modelo, $color, $id_cliente)
 	{
@@ -56,5 +64,20 @@ class Vehiculos_model
 	{
 		$sql = $this->db->prepare("delete from vehiculo WHERE matricula='" . $matricula."'");
 		$sql->execute();
+	}
+	public function getCliente($matricula)
+	{
+		include_once 'config/conexion.php';
+		Conexion::abrirConexion();
+		$this->db = Conexion::getConexion();
+		$sql =  $this->db->prepare("select concat(cliente.nombre || ' ' || cliente.ape_pat || ' ' || cliente.ape_mat ) as nombre
+		from
+			cliente,
+			vehiculo
+		where vehiculo.id_cliente = cliente.id_cliente and
+		vehiculo.matricula = '".$matricula."'");
+		$sql->execute();
+		$row = $sql->fetch(PDO::FETCH_ASSOC);
+		return $row;
 	}
 } //fin Clase
