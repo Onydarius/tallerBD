@@ -10,6 +10,7 @@ class ClientesController
         $clientes = new Clientes_model();
         $data["titulo"] = "Clientes";
         $data["clientes"] = $clientes->fillClientes();
+        require_once "site-media/views/menu.php";
         require_once "site-media/views/Clientes/clientes.php";
     }
 

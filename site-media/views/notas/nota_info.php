@@ -18,14 +18,18 @@
 
 <body>
     <div class="container shadow rounded border">
-        <form action="index.php?c=notas&a=actualizar" method="post">
+        <form action="index.php?c=notas&a=insertar" method="post">
             <div class="header float-sm-right">
                 <label for="folio">Folio</label>
                 <input class="form-control" name="id_nota" type="text" value=<?php echo $data["id_nota"]; ?> readonly>
                 <label for="folio">Fecha de entrada</label>
-                <input class="form-control" name="fec_entrada" type="text" value=<?php echo $data["nota"]["fec_entrada"]; ?> readonly>
+                <input class="form-control" name="id_nota" type="text" value=<?php echo $data["nota"]["fec_entrada"]; ?> readonly>
+                <label for="folio">Fecha de salida</label>
+                <input class="form-control" name="id_nota" type="text" value=<?php echo $data["nota"]["fec_salida"]; ?> readonly>
             </div>
             <div class="data">
+                <br>
+                <br>
                 <br>
                 <br>
                 <br>
@@ -41,16 +45,10 @@
                 <label for="dueño">Dueño</label>
                 <input id="owner" class="form-control owner" id="disabledInput" type="text" placeholder=<?php echo $data["nota"]["id_vehiculo"] ?> disabled>
 
-                mecanico
-                <select name="id_mecanico" class="custom-select">
+                Mecanico
+                <select name="id_mecanico" class="custom-select" disabled>
                     <?php
-                    foreach ($data["mecanicos"] as $row) {
-                        if($data["nota"]["id_mecanico"] == $row["id_mecanico"]){
-                            echo "<option value=" . $row["id_mecanico"] . " selected>" . $row["nombre"] . "</option>";
-                        }else{
-                            echo "<option value=" . $row["id_mecanico"] . ">" . $row["nombre"] . "</option>";
-                        }
-                    }
+                    echo "<option value=" . $data["mecanico"]["id_mecanico"] . ">" . $data["mecanico"]["nombre"] . " " . $data["mecanico"]["ape_pat"] . " " . $data["mecanico"]["ape_mat"] . "</option>";
                     ?>
                 </select>
 
@@ -61,7 +59,7 @@
                 <?php
                 foreach ($data["servicios"] as $row) {
                     echo "<div class=\"form-check form-check-inline\">";
-                    echo "<input id ='" . $row["id_servicios"] . "' class=\"form-check-input\" type=\"checkbox\" name=\"servicios[]\" value=\"" . $row["id_servicios"] . "\">";
+                    echo "<input id ='" . $row["id_servicios"] . "' class=\"form-check-input\" type=\"checkbox\" name=\"servicios[]\" value=\"" . $row["id_servicios"] . "\" disabled>";
                     echo "<label class=\"form-check-label\" for=\"inlineCheckbox1\">" . $row["nombre"] . "</label>";
                     echo "</div>";
                 }
@@ -70,8 +68,7 @@
             <div class="total">
                 <label for="dueño">Total</label>
                 <input id="total" class="form-control" id="disabledInput" type="text" placeholder=<?php echo $data["nota"]["total"] ?> disabled>
-                <button class="btn btn-dark " type="submit">Generar nota</button>
-                <input class="btn btn-dark " type="button" value="Cancelar" onclick="window.location = 'index.php?c=notas'">
+                <input class="btn btn-dark " type="button" value="Salir" onclick="window.location = 'index.php?c=notas'">
             </div>
             <br>
         </form>

@@ -10,7 +10,7 @@ class ServiciosController
         $servicios = new Servicios_model();
         $data["titulo"] = "Servicios";
         $data["Servicios"] = $servicios->fillServicios();
-        //require_once "site-media/views/menu.php";
+        require_once "site-media/views/menu.php";
         require_once "site-media/views/servicios/servicios.php";
     }
     public function agregarView()

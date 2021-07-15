@@ -23,7 +23,15 @@
   <div id="principal" class="container ">
     <table class="table">
       <thead>
-        <tr>
+      <tr>
+          <th scope="col">Servicio</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Precio</th>
+          <th scope="colgroup">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
           <?php foreach ($data["Servicios"] as $servicio) {
             echo "<tr>";
             echo "<td>" . $servicio["nombre"] . "</td>";
@@ -37,12 +45,9 @@
               }
             }
             echo "</tr>";
-          }
+          } 
           ?>
         </tr>
-      </thead>
-      <tbody>
-
 
       </tbody>
     </table>

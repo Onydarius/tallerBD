@@ -38,13 +38,14 @@
 
           if (!($_SESSION['user'] == "empleado")) {
             if(isset($nota["fec_salida"])){
-              echo "<td><a href='index.php?c=notas&a=modificarView&id=  " . $nota["id_nota"] . "' class='btn btn-info'>Info</a></td>";
+              echo "<td><a href='index.php?c=notas&a=infoView&id=  " . $nota["id_nota"] . "' class='btn btn-info'>Info</a>";
             }else{
-              echo "<td><a href='index.php?c=notas&a=modificarView&id=  " . $nota["id_nota"] . "' class='btn btn-warning'>Modificar</a></td>";
+              echo "<td><a href='index.php?c=notas&a=modificarView&id=  " . $nota["id_nota"] . "' class='btn btn-warning'>Modificar</a>";
             }
             if (!($_SESSION['user'] == "gerente")) {
-              echo "<td><a onclick=\"deleteRegister('notas','" . $nota["id_nota"] . "');return false;\"' class='btn btn-danger'>Eliminar</a></td>";
+              echo "<a onclick=\"deleteRegister('notas','" . $nota["id_nota"] . "');return false;\"' class='btn btn-danger'>Eliminar</a>";
             }
+            echo "</td>";
           }
           echo "</tr>";
         }

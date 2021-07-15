@@ -12,7 +12,6 @@
 
 <body>
   <div class=" d-md-flex justify-content-md-end">
-    <button type="button" class="btn btn-dark \" onclick="window.location = 'index.php?c=login&a=cerrarSesion'">Cerra sesion</button>
     <?php
     if (!($_SESSION['user'] == "empleado")) {
       print("<button type=\"button\" class=\"btn btn-dark \" onclick=\"window.location = 'index.php?c=vehiculos&a=agregarView'\">Agregar vehiculo</button>");
@@ -22,7 +21,7 @@
 
   </div>
   <div class="container">
-    <table class="table table-responsive">
+    <table class="table">
       <thead>
         <tr>
           <th scope="col">Matricula</th>
@@ -30,6 +29,7 @@
           <th scope="col">Modelo</th>
           <th scope="col">Color</th>
           <th scope="col">Dueño</th>
+          <th scope="col">Opciones</th>
           <?php
           if (!$_SESSION['user'] == "empleado") {
             echo "<th colspan=\"2\">Opciones</th>";
@@ -48,7 +48,7 @@
           echo "<td>" . $dato["nombre"] . "</td>";
 
           if (!($_SESSION['user'] == "empleado")) {
-            echo "<td><a href='index.php?c=vehiculos&a=modificarView&id=  " . $dato["matricula"] . "' class='btn btn-warning'>Modificar</a>";
+            echo "<td><a href='index.php?c=vehiculos&a=modificarView&id=" . $dato["matricula"] . "' class='btn btn-warning'>Modificar</a>";
             if(!($_SESSION['user'] == "gerente")){
               echo "<a onclick=\"deleteRegister('Vehiculos','".$dato["matricula"]."');return false;\"' class='btn btn-danger'>Eliminar</a></td>";
             }

@@ -10,6 +10,7 @@ class MecanicosController
         $mecanicos = new Mecanicos_model();
         $data["titulo"] = "Mecanicos";
         $data["mecanicos"] = $mecanicos->fillMecanicos();
+        require_once "site-media/views/menu.php";
         require_once "site-media/views/Mecanicos/mecanicos.php";
     }
 

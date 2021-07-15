@@ -48,7 +48,7 @@ class Vehiculos_model
 	}
 
 	public function getVehiculo($matricula)
-	{
+	{	
 		$sql =  $this->db->prepare("select * from vehiculo where matricula = '". $matricula. "' LIMIT 1");
 		$sql->execute();
 		$row = $sql->fetch(PDO::FETCH_ASSOC);

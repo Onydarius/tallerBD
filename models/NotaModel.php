@@ -30,10 +30,9 @@ class Notas_Model
         $row = $sql->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
-    public function insertar($id_nota, $dia,$mes,$año, $id_vehiculo, $id_mecanico)
+    public function insertar($id_nota, $fec_entrada, $id_vehiculo, $id_mecanico)
     {
-        $sql =  $this->db->prepare("INSERT INTO nota(id_nota, fec_entrada, id_vehiculo,id_mecanico, total) VALUES (".$id_nota.",make_date(". $año."
-        , ".$mes.", ". $dia."), '" . $id_vehiculo . "'," . $id_mecanico .", 0)");
+        $sql =  $this->db->prepare("INSERT INTO nota(id_nota, fec_entrada, id_vehiculo,id_mecanico, total) VALUES (".$id_nota.",'".$fec_entrada."', '" . $id_vehiculo . "'," . $id_mecanico .", 0)");
         $sql->execute();
     }
     public function agregarServicios($id_servico, $id_nota)
@@ -62,4 +61,14 @@ class Notas_Model
 		$row = $sql->fetch(PDO::FETCH_ASSOC);
 		return $row;
 	}
+    public function modificar($id_nota, $id_mecanico)
+    {
+        $sql = $this->db->prepare("UPDATE nota SET id_mecanico= " . $id_mecanico . " WHERE id_nota='" . $id_nota . "' ");
+        $sql->execute();
+    }
+
+    public function deleteNotaxServicio($id_nota){
+        $sql = $this->db->prepare("delete from notaxservicio WHERE id_nota   ='" . $id_nota."'");
+		$sql->execute();
+    }
 }

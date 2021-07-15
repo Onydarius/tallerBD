@@ -10,43 +10,39 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container shadow rounded border">
         <form action="index.php?c=vehiculos&a=insertar" method="post">
-            <table>
-                <tr>
-                    <td>Matricula</td>
-                    <td><input type="text" id="matricula" name="matricula" maxlength="10" value="" required></td>
-                </tr>
-                <tr>
-                    <td>Marca</td>
-                    <td><input type="text" id="marca" name="marca" value=""></td>
-                </tr>
-                <tr>
-                    <td>Modelo</td>
-                    <td><input type="text" id="modelo" name="modelo" value=""></td>
-                </tr>
-                <tr>
-                    <td>Color</td>
-                    <td><input type="text" id="color" name="color" value=""></td>
-                </tr>
-                <tr>
-                    <td>Dueño</td>
-                    <td>
-                        <select class="form-select form-select-sm" name="id_cliente" aria-label=".form-select-sm example" required>
-                            <option value="" selected disabled >Elige el dueño</option>
-                            <?php
-                                foreach($data['clientes'] as $row){
-                                    echo "<option value=" . $row["id_cliente"] . ">" . $row["nombre"] . "</option>"; 
-                                }
-                            ?>
+            <div class="col-md-4">
+                <label for="validationDefault01" class="form-label">Matricula</label>
+                <input type="text" class="form-control" maxlength="10" name="matricula" value="" required>
+            </div>
+            <div class="col-md-4">
+                <label for="validationDefault01" class="form-label">Marca</label>
+                <input type="text" class="form-control" name="marca" value="" required>
+            </div>
+            <div class="col-md-4">
+                <label for="validationDefault01" class="form-label">Modelo</label>
+                <input type="text" class="form-control" name="modelo" value="" required>
+            </div>
+            <div class="col-md-4">
+                <label for="validationDefault01" class="form-label">Color</label>
+                <input type="text" class="form-control" name="color" value="" required>
+            </div>
+            <div class="col-md-4">
+                <label for="validationDefault01" class="form-label">Dueño</label>
+                <select class="form-select form-select-sm" name="id_cliente" aria-label=".form-select-sm example" required>
+                    <option value="" selected disabled>Elige el dueño</option>
+                    <?php
+                    foreach ($data['clientes'] as $row) {
+                        echo "<option value=" . $row["id_cliente"] . ">" . $row["nombre"] . "</option>";
+                    }
+                    ?>
 
-                        </select>
-                    </td>
-                </tr>
+                </select>
+            </div>
+            <input class="btn btn-dark " type="submit" value="Guardar">
+            <input class="btn btn-dark " type="button" value="Cancelar" onclick="window.location = 'index.php?c=vehiculos'">
 
-            </table>
-            <input type="submit" value="Guardar">
-            <input type="button" value="Cancelar" onclick="window.location = 'index.php?c=vehiculos'">
         </form>
     </div>
 </body>
