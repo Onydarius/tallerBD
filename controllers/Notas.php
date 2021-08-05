@@ -33,7 +33,6 @@ class NotasController
         $id_vehiculo = $_POST['id_vehiculo'];
         $id_mecanico = $_POST['id_mecanico'];
         $servicios =$_POST['servicios'];
-        print_r($fec_entrada);
         $notas = new Notas_model();
         $notas->insertar($id_nota, $fec_entrada, $id_vehiculo, $id_mecanico );
         

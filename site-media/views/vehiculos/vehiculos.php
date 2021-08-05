@@ -13,10 +13,8 @@
 <body>
   <div class=" d-md-flex justify-content-md-end">
     <?php
-    if (!($_SESSION['user'] == "empleado")) {
+    if (!($_SESSION['user'] == "empleado"))
       print("<button type=\"button\" class=\"btn btn-dark \" onclick=\"window.location = 'index.php?c=vehiculos&a=agregarView'\">Agregar vehiculo</button>");
-    } else {
-    }
     ?>
 
   </div>

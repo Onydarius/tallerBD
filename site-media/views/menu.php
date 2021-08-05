@@ -21,26 +21,30 @@
 
         <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item <?php if ($data["titulo"] == "Clientes") echo 'active' ?>">
                     <a class="nav-link" href="index.php?c=clientes">Clientes</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?php if ($data["titulo"] == "Vehiculos") echo 'active' ?>">
                     <a class="nav-link" href="index.php?c=Vehiculos">Vehiculos</a>
                 </li>
+
+                <?php if ($_SESSION['user'] != 'empleado' && $data["titulo"] == "Notas") echo '
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.php?c=Notas">Notas</a>
+                </li>';
+                else echo '
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?c=Notas">Notas</a>
-                </li>
-                <li class="nav-item">
+                </li>'
+                ?>  
+                <li class="nav-item <?php if ($data["titulo"] == "Servicios") echo 'active' ?>">
                     <a class="nav-link" href="index.php?c=Servicios">Servicios</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reportes</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="index.php?c=reportes">Action</a>
-                        <a class="dropdown-item" href="index.php?c=Notas">Another action</a>
-                        <a class="dropdown-item" href="index.php?c=Notas">Something else here</a>
-                    </div>
-                </li>
+
+                <?php if ($_SESSION['user'] != 'empleado' && $_SESSION['user'] != 'gerente') echo '
+                <li class="nav-item">
+                <a class="nav-link" href="index.php?c=Reportes">Generar reporte</a>
+            </li>' ?>
             </ul>
         </div>
         <form class="form-inline my-2 my-lg-0">

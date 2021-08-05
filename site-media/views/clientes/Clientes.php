@@ -12,7 +12,8 @@
 
 <body>
   <div class=" d-md-flex justify-content-md-end">
-    <button type="button" class="btn btn-dark " onclick="window.location = 'index.php?c=clientes&a=agregarView'">Añadir cliente</button>
+    <?php if (!($_SESSION['user'] == "empleado")) echo'
+    <button type="button" class="btn btn-dark " onclick="window.location = \'index.php?c=clientes&a=agregarView\'">Añadir cliente</button>'?>
   </div>
   <div class="container">
     <table class="table">

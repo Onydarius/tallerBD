@@ -38,8 +38,12 @@ class ClientesController
     public function eliminar($id_cliente)
     {   
         $clientes = new Clientes_model();
-        $clientes->eliminar($id_cliente);
-        $this->index();
+        try {
+            $clientes->eliminar($id_cliente);
+            $this->index();
+        } catch (Exception $e) {
+            print $e->getMessage();
+        }   
     }
 
     public function modificarView($id_cliente)
