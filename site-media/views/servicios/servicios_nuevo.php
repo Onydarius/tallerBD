@@ -21,7 +21,7 @@
       </div>
       <div class="col-md-4">
         <label for="validationDefault05" class="form-label">Precio</label>
-        <input type="number" class="form-control" name="precios" required>
+        <input type="number" class="form-control" name="precios" max="9999.99" step="0.5" required>
       </div>
       <div class="col-12">
         <button class="btn btn-dark " type="submit">Añadir servicio</button>

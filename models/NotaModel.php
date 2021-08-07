@@ -63,7 +63,7 @@ class Notas_Model
 	}
     public function modificar($id_nota, $id_mecanico)
     {
-        $sql = $this->db->prepare("UPDATE nota SET id_mecanico= " . $id_mecanico . " WHERE id_nota='" . $id_nota . "' ");
+        $sql = $this->db->prepare("UPDATE nota SET id_mecanico= " . $id_mecanico . ", total = 0 WHERE id_nota='" . $id_nota . "' ");
         $sql->execute();
     }
 

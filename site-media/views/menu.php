@@ -35,7 +35,8 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="index.php?c=Notas">Notas</a>
                 </li>';
-                else echo '
+                else if ($_SESSION['user'] != 'empleado') 
+                echo '
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?c=Notas">Notas</a>
                 </li>'
