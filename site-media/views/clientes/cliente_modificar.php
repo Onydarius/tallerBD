@@ -13,27 +13,27 @@
         <form class="row g-3" action="index.php?c=clientes&a=actualizar" method="post">
             <div class="col-md-4">
                 <label for="validationDefault01" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre" value="<?php echo $data["cliente"]["nombre"]; ?>" required>
+                <input type="text" class="form-control" name="nombre" value="<?php echo $data["cliente"]["nombre"]; ?>" maxlength="20" required>
             </div>
             <div class="col-md-4">
                 <label for="validationDefault02" class="form-label">Apellido paterno</label>
-                <input type="text" class="form-control" name="ape_pat" value="<?php echo $data["cliente"]["ape_pat"]; ?>" required>
+                <input type="text" class="form-control" name="ape_pat" value="<?php echo $data["cliente"]["ape_pat"]; ?>" maxlength="20" required>
             </div>
             <div class="col-md-4">
                 <label for="validationDefault02" class="form-label">Apellido materno</label>
-                <input type="text" class="form-control" name="ape_mat" value="<?php echo $data["cliente"]["ape_mat"]; ?>" required>
+                <input type="text" class="form-control" name="ape_mat" value="<?php echo $data["cliente"]["ape_mat"]; ?>" maxlength="20" required>
             </div>
             <div class="col-md-4">
                 <label for="validationDefault03" class="form-label">E-mail</label>
-                <input type="email" class="form-control" name="mail" value="<?php echo $data["cliente"]["mail"]; ?>" required>
+                <input type="email" class="form-control" name="mail" value="<?php echo $data["cliente"]["mail"]; ?>" maxlength="40" required>
             </div>
             <div class="col-md-4">
                 <label for="validationDefault04" class="form-label">Direccion</label>
-                <input type="text" class="form-control" name="direccion" value="<?php echo $data["cliente"]["direccion"]; ?>" required>
+                <input type="text" class="form-control" name="direccion" value="<?php echo $data["cliente"]["direccion"]; ?>" maxlength="60" required>
             </div>
             <div class="col-md-4">
                 <label for="validationDefault05" class="form-label">Telefono</label>
-                <input type="text" class="form-control" name="telefono"  value="<?php echo $data["cliente"]["telefono"]; ?>"required>
+                <input type="number" class="form-control" name="telefono"  value="<?php echo $data["cliente"]["telefono"]; ?>" maxlength="10" required onkeyup="this.value=this.value.replace(/[^\d]/,'')">
 				<input type="hidden"  name="id_cliente"  value="<?php echo $data["id_cliente"]; ?>">
             </div>
             <div class="col-12">

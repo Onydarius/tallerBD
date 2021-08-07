@@ -24,6 +24,9 @@
                 <li class="nav-item <?php if ($data["titulo"] == "Clientes") echo 'active' ?>">
                     <a class="nav-link" href="index.php?c=clientes">Clientes</a>
                 </li>
+                <li class="nav-item <?php if ($data["titulo"] == "Mecanicos") echo 'active' ?>">
+                    <a class="nav-link" href="index.php?c=Mecanicos">Mecanicos</a>
+                </li>
                 <li class="nav-item <?php if ($data["titulo"] == "Vehiculos") echo 'active' ?>">
                     <a class="nav-link" href="index.php?c=Vehiculos">Vehiculos</a>
                 </li>

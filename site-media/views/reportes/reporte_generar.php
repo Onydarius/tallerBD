@@ -28,9 +28,9 @@
                     <form method="post" action="index.php?c=reportes&a=generarVehiculos">
                         <td>La marca y modelo de los vehiculos que han estado en el periodo</td>
                         <td>
-                            <input type = "date" name="fec_entrada" width="150" value="" />
+                            <input type = "date" name="fec_entrada" width="150" value="2020-01-01" max="2099-12-31"/>
                             <span class="align-middle">a</span>
-                            <input type = "date" name="fec_salida" width="150" value="" />
+                            <input type = "date" name="fec_salida" width="150" value="2020-01-01" max="2099-12-31" />
                             
                         </td>
                         <td class="text-center">

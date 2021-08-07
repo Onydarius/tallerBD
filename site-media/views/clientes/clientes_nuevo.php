@@ -14,27 +14,27 @@
         <form class="row g-3" action="index.php?c=clientes&a=insertar" method="post">
             <div class="col-md-4">
                 <label for="validationDefault01" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre" value="" required>
+                <input type="text" class="form-control" name="nombre" maxlength="20" value="" required>
             </div>
             <div class="col-md-4">
                 <label for="validationDefault02" class="form-label">Apellido paterno</label>
-                <input type="text" class="form-control" name="ape_pat" value="" required>
+                <input type="text" class="form-control" name="ape_pat" maxlength="20" value="" required>
             </div>
             <div class="col-md-4">
                 <label for="validationDefault02" class="form-label">Apellido materno</label>
-                <input type="text" class="form-control" name="ape_mat" value="" required>
+                <input type="text" class="form-control" name="ape_mat" maxlength="20" value="" required>
             </div>
             <div class="col-md-4">
                 <label for="validationDefault03" class="form-label">E-mail</label>
-                <input type="email" class="form-control" name="mail" required>
+                <input type="email" class="form-control" name="mail" maxlength="40" required>
             </div>
             <div class="col-md-4">
                 <label for="validationDefault04" class="form-label">Direccion</label>
-                <input type="text" class="form-control" name="direccion" value="" required>
+                <input type="text" class="form-control" name="direccion" value="" maxlength="60" required>
             </div>
             <div class="col-md-4">
                 <label for="validationDefault05" class="form-label">Telefono</label>
-                <input type="text" class="form-control" name="telefono" required>
+                <input type="text" class="form-control" name="telefono" maxlength ="10" required onkeyup="this.value=this.value.replace(/[^\d]/,'')">
             </div>
             <div class="col-12">
                 <button class="btn btn-dark " type="submit">Registrar cliente</button>
